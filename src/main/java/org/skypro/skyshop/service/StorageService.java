@@ -4,10 +4,12 @@ import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.product.DiscountedProduct;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SimpleProduct;
+import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class StorageService {
@@ -33,6 +35,22 @@ public class StorageService {
 
     public Map<UUID, Article> getArticles() {
         return articles;
+    }
+
+    public Collection<Product> getAllProducts() {
+        return getProducts().values();
+    }
+
+    public Collection<Article> getAllArticles() {
+        return getArticles().values();
+    }
+
+    public Collection<SearchResult> search(String pattern) {
+        Collection<Searchable> searchables = getAllSearchables();
+        return searchables.stream()
+                .filter(searchable -> searchable.getStringRepresentation().toLowerCase().contains(pattern.toLowerCase()))
+                .map(searchable -> new SearchResult(searchable.getId().toString(), searchable.getSearchTerm(), searchable.getContentType()))
+                .collect(Collectors.toList());
     }
 
     private void addToStorage() {
