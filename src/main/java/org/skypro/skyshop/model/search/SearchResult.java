@@ -11,6 +11,18 @@ public class SearchResult {
         this.contentType = contentType;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
     public static SearchResult fromSearchable(Searchable searchable) {
         if (searchable == null) {
             return null;

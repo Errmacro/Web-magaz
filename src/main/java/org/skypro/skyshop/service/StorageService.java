@@ -7,6 +7,7 @@ import org.skypro.skyshop.model.product.SimpleProduct;
 import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class StorageService {
     private final Map<UUID, Product> products;
     private final Map<UUID, Article> articles;
 
-    public StorageService(){
+    public StorageService() {
         this.products = new HashMap<>();
         this.articles = new HashMap<>();
         addToStorage();
@@ -49,17 +50,17 @@ public class StorageService {
         Collection<Searchable> searchables = getAllSearchables();
         return searchables.stream()
                 .filter(searchable -> searchable.getStringRepresentation().toLowerCase().contains(pattern.toLowerCase()))
-                .map(searchable -> new SearchResult(searchable.getId().toString(), searchable.getSearchTerm(), searchable.getContentType()))
+                .map(SearchResult::fromSearchable)
                 .collect(Collectors.toList());
     }
 
     private void addToStorage() {
-        products.put(UUID.randomUUID(),new SimpleProduct(UUID.randomUUID(), "Книга", 500));
-        products.put(UUID.randomUUID(),new SimpleProduct(UUID.randomUUID(), "Клей", 110));
-        products.put(UUID.randomUUID(),new DiscountedProduct(UUID.randomUUID(), "Тетрадь", 30, 5));
+        products.put(UUID.randomUUID(), new SimpleProduct(UUID.randomUUID(), "Книга", 500));
+        products.put(UUID.randomUUID(), new SimpleProduct(UUID.randomUUID(), "Клей", 110));
+        products.put(UUID.randomUUID(), new DiscountedProduct(UUID.randomUUID(), "Тетрадь", 30, 5));
 
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(),"Крепость", "Книга о поиске себя"));
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(),"Мост на Дрине", "Книга о вечности и людских судьбах"));
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(),"Магия Белграда","Книга о неповторимом духе древнего города"));
+        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Крепость", "Книга о поиске себя"));
+        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Мост на Дрине", "Книга о вечности и людских судьбах"));
+        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Магия Белграда", "Книга о неповторимом духе древнего города"));
     }
 }

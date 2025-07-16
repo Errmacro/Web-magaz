@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -40,7 +41,6 @@ public class StoreController {
     @GetMapping("/search-terms")
     public Collection<String> getSearchTerms() {
         Collection<Searchable> searchables = storageService.getAllSearchables();
-
         return searchables.stream()
                 .map(Searchable::getSearchTerm)
                 .collect(Collectors.toList());
