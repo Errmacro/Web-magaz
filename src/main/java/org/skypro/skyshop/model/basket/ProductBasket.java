@@ -1,11 +1,14 @@
 package org.skypro.skyshop.model.basket;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductBasket {
     private final Map<UUID, Integer> totalBasket;
 
@@ -25,8 +28,4 @@ public class ProductBasket {
     public Map<UUID, Integer> getProducts() {
         return Collections.unmodifiableMap(totalBasket);
     }
-
-
-
-
 }
