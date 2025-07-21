@@ -63,4 +63,8 @@ public class StorageService {
         articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Мост на Дрине", "Книга о вечности и людских судьбах"));
         articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Магия Белграда", "Книга о неповторимом духе древнего города"));
     }
+
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(products.get(id));
+    }
 }

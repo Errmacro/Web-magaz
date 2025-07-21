@@ -1,5 +1,6 @@
 package org.skypro.skyshop.model.basket;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -20,6 +21,12 @@ public class ProductBasket {
         return totalBasket.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
+
+    public Map<UUID, Integer> getProducts() {
+        return Collections.unmodifiableMap(totalBasket);
+    }
+
+
 
 
 }
