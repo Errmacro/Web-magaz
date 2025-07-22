@@ -24,32 +24,30 @@ public class BasketService {
     }
 
     public void addProductToBasket(UUID id) {
-        Product product = storageService.getProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Продукт с ID " + id + " не найден"));
-
-        Integer currentCount = productBasket.getProducts().getOrDefault(id, 0);
-        productBasket.addProduct(id, currentCount + 1);
+        System.out.println("Checking product with ID: " + id);
+        Optional<Product> optionalProduct = storageService.getProductById(id);
+        System.out.println("Product present: " + optionalProduct.isPresent());
+        if (!optionalProduct.isPresent()) {
+            throw new IllegalArgumentException("Product with ID " + id + " does not exist.");
+        }
+        productBasket.addProduct(id);
     }
 
-    public UserBasket getUserBasket(){
-        Map<UUID, Integer>productMap = productBasket.getProducts();
-        List<BasketItem> items = productMap.entrySet().stream()
+    public UserBasket getUserBasket() {
+        Map<UUID, Integer> productsInBasket = productBasket.getProducts();
+
+        List<BasketItem> basketItems = productsInBasket.entrySet().stream()
                 .map(entry -> {
-                    UUID productId = entry.getKey();
-            Integer quantity = entry.getValue();
-            Optional<Product> product = storageService.getProductById(productId);
-                    Product actualProduct = product.orElseThrow(() -> new IllegalArgumentException("Product not found"));
-            return new BasketItem(actualProduct, quantity);
-        })
+                    Product product = storageService.getProductById(entry.getKey()).orElse(null);
+                    return new BasketItem(product, entry.getValue());
+                })
                 .collect(Collectors.toList());
-        return new UserBasket(items);
+
+        double total = basketItems.stream()
+                .mapToDouble(item -> item.getProduct().getProductPrice() * item.getQuantity())
+                .sum();
+
+        return new UserBasket(basketItems, total);
     }
 
-    public ProductBasket getProductBasket() {
-        return productBasket;
-    }
-
-    public StorageService getStorageService() {
-        return storageService;
-    }
 }

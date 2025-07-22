@@ -58,12 +58,13 @@ public class StoreController {
         return storageService.getAllSearchables();}
 
     @GetMapping("/basket/{id}")
-    public String addProduct(@PathVariable("id") UUID id){
+    public String addProduct(@PathVariable("id") UUID id) {
         basketService.addProductToBasket(id);
-        return "Продукт успешно добавлен";}
+        return "Продукт успешно добавлен";
+    }
 
     @GetMapping("/basket")
-    public UserBasket getUserBasket(){
+    public UserBasket getUserBasket() {
         return basketService.getUserBasket();
     }
 }
