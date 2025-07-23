@@ -58,13 +58,18 @@ public class StorageService {
 
     private void addToStorage() {
         Product book = new SimpleProduct("Книга", 500);
-        products.put(book.getId(),book);
-        products.put(UUID.randomUUID(), new SimpleProduct("Клей", 110));
-        products.put(UUID.randomUUID(), new DiscountedProduct("Тетрадь", 30, 5));
+        Product clue = new SimpleProduct("Клей", 110);
+        Product notebook = new DiscountedProduct("Тетрадь", 30, 5);
+        Article fortress = new Article("Крепость", "Книга о поиске себя");
+        Article bridge = new Article("Мост на Дрине", "Книга о вечности и людских судьбах");
+        Article magic = new Article("Магия Белграда", "Книга о неповторимом духе древнего города");
+        products.put(book.getId(), book);
+        products.put(clue.getId(), clue);
+        products.put(notebook.getId(), notebook);
 
-        articles.put(UUID.randomUUID(), new Article( "Крепость", "Книга о поиске себя"));
-        articles.put(UUID.randomUUID(), new Article( "Мост на Дрине", "Книга о вечности и людских судьбах"));
-        articles.put(UUID.randomUUID(), new Article( "Магия Белграда", "Книга о неповторимом духе древнего города"));
+        articles.put(fortress.getId(), fortress);
+        articles.put(bridge.getId(), bridge);
+        articles.put(magic.getId(), magic);
     }
 
     public Optional<Product> getProductById(UUID id) {
