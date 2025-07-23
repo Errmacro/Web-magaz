@@ -7,6 +7,8 @@ import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
 import org.skypro.skyshop.service.BasketService;
 import org.skypro.skyshop.service.StorageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ public class StoreController {
     private final StorageService storageService;
     private final BasketService basketService;
     private Searchable searchable;
+    private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 
     public StoreController(StorageService storageService,BasketService basketService) {
         this.storageService = storageService;
@@ -31,7 +34,9 @@ public class StoreController {
 
     @GetMapping("/products")
     public Collection<Product> getAllProducts() {
-        return storageService.getAllProducts();
+        Collection<Product> products = storageService.getAllProducts();
+        logger.info("[{}] Returning products to browser: {}", java.time.Instant.now(), products);
+        return products;
     }
 
     @GetMapping("/articles")

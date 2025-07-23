@@ -31,6 +31,7 @@ public class StorageService {
     }
 
     public Map<UUID, Product> getProducts() {
+        System.out.println("Data from getProducts: " + products);
         return products;
     }
 
@@ -39,6 +40,7 @@ public class StorageService {
     }
 
     public Collection<Product> getAllProducts() {
+        System.out.println("Data from storageService: " + products);
         return getProducts().values();
     }
 
@@ -55,13 +57,14 @@ public class StorageService {
     }
 
     private void addToStorage() {
-        products.put(UUID.randomUUID(), new SimpleProduct(UUID.randomUUID(), "Книга", 500));
-        products.put(UUID.randomUUID(), new SimpleProduct(UUID.randomUUID(), "Клей", 110));
-        products.put(UUID.randomUUID(), new DiscountedProduct(UUID.randomUUID(), "Тетрадь", 30, 5));
+        Product book = new SimpleProduct("Книга", 500);
+        products.put(book.getId(),book);
+        products.put(UUID.randomUUID(), new SimpleProduct("Клей", 110));
+        products.put(UUID.randomUUID(), new DiscountedProduct("Тетрадь", 30, 5));
 
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Крепость", "Книга о поиске себя"));
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Мост на Дрине", "Книга о вечности и людских судьбах"));
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Магия Белграда", "Книга о неповторимом духе древнего города"));
+        articles.put(UUID.randomUUID(), new Article( "Крепость", "Книга о поиске себя"));
+        articles.put(UUID.randomUUID(), new Article( "Мост на Дрине", "Книга о вечности и людских судьбах"));
+        articles.put(UUID.randomUUID(), new Article( "Магия Белграда", "Книга о неповторимом духе древнего города"));
     }
 
     public Optional<Product> getProductById(UUID id) {

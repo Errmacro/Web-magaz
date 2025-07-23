@@ -8,19 +8,22 @@ import java.util.UUID;
 
 public abstract class Product implements Searchable {
     protected final String productName;
+
     private final UUID id;
+
+
+
+    public Product(String productName) {
+        if ((productName == null)||(productName.isBlank())) {
+            throw new IllegalArgumentException("Некорректное имя продукта");
+        }
+        this.productName = productName;
+        this.id = UUID.randomUUID();
+    }
 
     @Override
     public UUID getId() {
         return id;
-    }
-
-    public Product(UUID id,String productName, int productPrice) {
-        this.productName = productName;
-        this.id = id;
-        if ((productName == null)||(productName.isBlank())) {
-            throw new IllegalArgumentException("Некорректное имя продукта");
-        }
     }
 
     public String getProductName() {

@@ -5,8 +5,8 @@ import java.util.UUID;
 public class FixPriceProduct extends Product{
     private static final int FIX_PRICE=100;
 
-    public FixPriceProduct(UUID id, String productName, int FIX_PRICE) {
-        super(id,productName, FIX_PRICE);
+    public FixPriceProduct(String productName) {
+        super(productName);
     }
 
     @Override

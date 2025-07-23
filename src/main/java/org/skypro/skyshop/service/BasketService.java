@@ -24,12 +24,8 @@ public class BasketService {
     }
 
     public void addProductToBasket(UUID id) {
-        System.out.println("Checking product with ID: " + id);
-        Optional<Product> optionalProduct = storageService.getProductById(id);
-        System.out.println("Product present: " + optionalProduct.isPresent());
-        if (!optionalProduct.isPresent()) {
-            throw new IllegalArgumentException("Product with ID " + id + " does not exist.");
-        }
+        storageService.getProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product with ID " + id + " does not exist."));
         productBasket.addProduct(id);
     }
 

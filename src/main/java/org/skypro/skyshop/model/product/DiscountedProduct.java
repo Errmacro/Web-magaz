@@ -6,8 +6,8 @@ public class DiscountedProduct extends Product {
     private final int productPrice;
     private final int discount;
 
-    public DiscountedProduct(UUID id,String productName, int productPrice, int discount) {
-        super(id, productName, productPrice);
+    public DiscountedProduct(String productName, int productPrice, int discount) {
+        super(productName);
         this.discount=discount;
         this.productPrice=productPrice;
         if (productPrice <=0) {

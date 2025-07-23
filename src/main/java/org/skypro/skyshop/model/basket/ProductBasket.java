@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 @SessionScope
 @Component
+@Service
 public class ProductBasket {
 
     private final Map<UUID, Integer> totalBasket = new HashMap<>();

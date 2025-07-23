@@ -11,15 +11,15 @@ public final class Article implements Searchable {
     private final String articleText;
     private final UUID id;
 
+    public Article(String articleName, String articleText) {
+        this.articleName = articleName;
+        this.articleText = articleText;
+        this.id = UUID.randomUUID();
+    }
+
     @Override
     public UUID getId() {
         return id;
-    }
-
-    public Article(UUID id,String articleName, String articleText) {
-        this.articleName = articleName;
-        this.articleText = articleText;
-        this.id = id;
     }
 
     @Override
