@@ -31,6 +31,7 @@ public class StorageService {
     }
 
     public Map<UUID, Product> getProducts() {
+        System.out.println("Data from getProducts: " + products);
         return products;
     }
 
@@ -39,6 +40,7 @@ public class StorageService {
     }
 
     public Collection<Product> getAllProducts() {
+        System.out.println("Data from storageService: " + products);
         return getProducts().values();
     }
 
@@ -55,12 +57,24 @@ public class StorageService {
     }
 
     private void addToStorage() {
-        products.put(UUID.randomUUID(), new SimpleProduct(UUID.randomUUID(), "Книга", 500));
-        products.put(UUID.randomUUID(), new SimpleProduct(UUID.randomUUID(), "Клей", 110));
-        products.put(UUID.randomUUID(), new DiscountedProduct(UUID.randomUUID(), "Тетрадь", 30, 5));
+        Product book = new SimpleProduct("Книга", 500);
+        Product clue = new SimpleProduct("Клей", 110);
+        Product notebook = new DiscountedProduct("Тетрадь", 30, 5);
+        Article fortress = new Article("Крепость", "Книга о поиске себя");
+        Article bridge = new Article("Мост на Дрине", "Книга о вечности и людских судьбах");
+        Article magic = new Article("Магия Белграда", "Книга о неповторимом духе древнего города");
+        products.put(book.getId(), book);
+        products.put(clue.getId(), clue);
+        products.put(notebook.getId(), notebook);
 
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Крепость", "Книга о поиске себя"));
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Мост на Дрине", "Книга о вечности и людских судьбах"));
-        articles.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "Магия Белграда", "Книга о неповторимом духе древнего города"));
+        articles.put(fortress.getId(), fortress);
+        articles.put(bridge.getId(), bridge);
+        articles.put(magic.getId(), magic);
     }
+
+    public Optional<Product> getProductById(UUID id) {
+        System.out.println(products);
+        return Optional.ofNullable(products.get(id));
+    }
+
 }

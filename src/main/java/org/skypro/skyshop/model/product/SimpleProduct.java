@@ -6,8 +6,8 @@ public class SimpleProduct extends Product {
     private int productPrice;
 
 
-    public SimpleProduct(UUID id, String productName, int productPrice) {
-        super(id, productName, productPrice);
+    public SimpleProduct(String productName, int productPrice) {
+        super(productName);
         this.productPrice = productPrice;
         if (productPrice <=0) {
             throw new IllegalArgumentException("Некорректная стоимость продукта");
