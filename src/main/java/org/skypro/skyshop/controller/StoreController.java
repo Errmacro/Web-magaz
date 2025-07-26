@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class StoreController {
     private final StorageService storageService;
     private final BasketService basketService;
-    private Searchable searchable;
     private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 
     public StoreController(StorageService storageService,BasketService basketService) {
